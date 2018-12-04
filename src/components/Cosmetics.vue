@@ -86,6 +86,7 @@ export default {
     },
     editCosmetic: function (id, publisher) {
       this.$router.params = id
+      console.log(this.$router.params)
       // this.$router.params.publisher = publisher
       this.$router.push('edit')
     },

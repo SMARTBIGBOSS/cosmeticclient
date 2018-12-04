@@ -4,9 +4,6 @@ export default {
   fetchCosmetics () {
     return Api().get('/cosmetics')
   },
-  fetchCosmetic (id) {
-    return Api().get(`/cosmetic/${id}`)
-  },
   fetchCosmeticsByHighPrice () {
     return Api().get('/cosmetics/sortByHighPrice')
   },
@@ -15,6 +12,9 @@ export default {
   },
   postCosmetic () {
     return Api().post('/cosmetics/:publisher/add')
+  },
+  fetchCosmetic (id) {
+    return Api().get(`/cosmetic/${id}`)
   },
   putCosmetic (id, publisher, cosmetic) {
     console.log('REQUESTING ' + cosmetic._id + ' ' +

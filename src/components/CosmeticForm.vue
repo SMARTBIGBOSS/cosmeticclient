@@ -1,21 +1,31 @@
 <template>
   <form @submit.prevent="submit">
+
     <div class="form-group" :class="{ 'form-group--error': $v.name.$error }">
-      <label class="form-control-label" name="name">Cosmetic name (required)</label>
-      <input class="form__input" type="text" v-model.trim="name"/>
+      <label class="form-label">Cosmetic name (required)</label>
+      <input class="form__input" type="text" v-model.trim="$v.name.$model"/>
     </div>
     <div class="error" v-if="!$v.name.required">Name is Required</div>
     <div class="error" v-if="!$v.name.maxLength">Name must have at most {{$v.name.$params.maxLength.max}} letters.</div>
+
     <div class="form-group" :class="{ 'form-group--error': $v.brand.$error }">
       <label class="form__label">Brand (required)</label>
-      <input class="form__input" placeholder="enter some message here" v-model.trim="$v.brand.$error"/>
+      <input class="form__input" type="text" v-model.trim="$v.brand.$error"/>
     </div>
     <div class="error" v-if="!$v.brand.required">Brand is Required</div>
+
     <div class="form-group" :class="{ 'form-group--error': $v.price.$error }">
       <label class="form-control-label" name="price">Price</label>
       <input class="form__input" type="decimal" v-model.trim="price"/>
     </div>
     <div class="error" v-if="!$v.price.between">Price must be between 0 and 10000</div>
+
+    <div class="form-group" :class="{ 'form-group--error': $v.publisher.$error }">
+      <label class="form__label">Publisher (required)</label>
+      <input class="form__input" type="text" v-model.trim="$v.publisher.$error"/>
+    </div>
+    <div class="error" v-if="!$v.publisher.required">Publisher is Required</div>
+
     <p>
       <button class="btn btn-primary btn1" type="submit" :disabled="submitStatus === 'PENDING'">{{ cosmeticBtnTitle }}</button>
     </p>
@@ -52,6 +62,7 @@ export default {
       name: this.cosmetic.name,
       brand: this.cosmetic.brand,
       price: this.cosmetic.price,
+      publisher: this.cosmetic.publisher,
       submitStatus: null
     }
   },

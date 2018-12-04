@@ -5,8 +5,8 @@
       <div class="row justify-content-center">
         <div class="col-md-6">
           <template v-if="childDataLoaded">
-          <cosmeticform :cosmetic="cosmetic" cosmeticBtnTitle="Update Cosmetic"
-                         @cosmetic-is-created-updated="updateCosmetic"></cosmeticform>
+          <cosmetic-form :cosmetic="cosmetic" cosmeticBtnTitle="Update Cosmetic"
+                         @cosmetic-is-created-updated="updateCosmetic"></cosmetic-form>
           </template>
         </div><!-- /col -->
       </div><!-- /row -->
@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     getCosmetic: function () {
-      CosmeticService.fetchCosmetic(this.$router.params.id)
+      CosmeticService.fetchCosmetic(this.$router.params)
         .then(response => {
           this.temp = response.data
           this.cosmetic = this.temp[0]
