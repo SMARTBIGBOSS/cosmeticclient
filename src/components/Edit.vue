@@ -38,7 +38,7 @@ export default {
       CosmeticService.fetchCosmetic(this.$router.params)
         .then(response => {
           this.temp = response.data
-          this.cosmetic = this.temp[0]
+          this.cosmetic = response.data
           this.childDataLoaded = true
           console.log('Getting Cosmetic in Edit: ' + JSON.stringify(this.cosmetic, null, 5))
         })
@@ -49,7 +49,7 @@ export default {
     },
     updateCosmetic: function (cosmetic) {
       console.log('Before PUT ' + JSON.stringify(cosmetic, null, 5))
-      CosmeticService.putCosmetic(this.$router.params.id, this.$router.params.publisher, cosmetic)
+      CosmeticService.putCosmetic(this.$router.params, cosmetic)
         .then(response => {
           console.log(response)
           console.log('AFTER PUT ' + JSON.stringify(cosmetic, null, 5))

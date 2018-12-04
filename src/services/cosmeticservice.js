@@ -16,10 +16,10 @@ export default {
   fetchCosmetic (id) {
     return Api().get(`/cosmetic/${id}`)
   },
-  putCosmetic (id, publisher, cosmetic) {
-    console.log('REQUESTING ' + cosmetic._id + ' ' +
+  putCosmetic (id, cosmetic) {
+    console.log('REQUESTING ' + id + ' ' +
       JSON.stringify(cosmetic, null, 5))
-    return Api().put(`/cosmetics/${publisher}/${id}/edit`, cosmetic,
+    return Api().put(`/cosmetics/${id}/edit`, cosmetic,
       { headers: {'Content-type': 'application/json'} })
   },
   deleteCosmetic () {

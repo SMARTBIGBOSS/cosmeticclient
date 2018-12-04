@@ -7,7 +7,7 @@
         <button v-on:click="sortByLowPrice">Sort by Low Price</button>
       </div>
       <v-client-table :columns="columns" :data="cosmetics" :options="options">
-        <a slot="edit" slot-scope="props" class="fa fa-edit fa-2x" @click="editCosmetic(props.row._id,props.row.publisher)"></a>
+        <a slot="edit" slot-scope="props" class="fa fa-edit fa-2x" @click="editCosmetic(props.row._id)"></a>
         <a slot="remove" slot-scope="props" class="fa fa-trash-o fa-2x" @click="deleteCosmetic(props.row._id)"></a>
       </v-client-table>
     </div>
@@ -26,7 +26,7 @@ export default {
     return {
       messagetitle: ' Cosmetics List ',
       cosmetics: [],
-      props: ['_id', 'publisher'],
+      props: ['_id'],
       errors: [],
       columns: ['_id', 'name', 'brand', 'price', 'publisher', 'edit', 'remove'],
       options: {
@@ -86,7 +86,6 @@ export default {
     },
     editCosmetic: function (id, publisher) {
       this.$router.params = id
-      console.log(this.$router.params)
       // this.$router.params.publisher = publisher
       this.$router.push('edit')
     },

@@ -1,16 +1,15 @@
 <template>
   <form @submit.prevent="submit">
-
     <div class="form-group" :class="{ 'form-group--error': $v.name.$error }">
-      <label class="form-label">Cosmetic name (required)</label>
-      <input class="form__input" type="text" v-model.trim="$v.name.$model"/>
+      <label class="form-label" name="name">Cosmetic name</label>
+      <input class="form__input" type="text" v-model.trim="name"/>
     </div>
     <div class="error" v-if="!$v.name.required">Name is Required</div>
     <div class="error" v-if="!$v.name.maxLength">Name must have at most {{$v.name.$params.maxLength.max}} letters.</div>
 
-    <div class="form-group" :class="{ 'form-group--error': $v.brand.$error }">
-      <label class="form__label">Brand (required)</label>
-      <input class="form__input" type="text" v-model.trim="$v.brand.$error"/>
+    <div class="form-group--error" :class="{ 'form-group--error': $v.brand.$error }">
+      <label class="form-label" name="brand">Brand (required)</label>
+      <input class="form__input" type="text" v-model.trim="brand"/>
     </div>
     <div class="error" v-if="!$v.brand.required">Brand is Required</div>
 
@@ -18,11 +17,12 @@
       <label class="form-control-label" name="price">Price</label>
       <input class="form__input" type="decimal" v-model.trim="price"/>
     </div>
+    <div class="error" v-if="!$v.price.required">Price is Required</div>
     <div class="error" v-if="!$v.price.between">Price must be between 0 and 10000</div>
 
     <div class="form-group" :class="{ 'form-group--error': $v.publisher.$error }">
-      <label class="form__label">Publisher (required)</label>
-      <input class="form__input" type="text" v-model.trim="$v.publisher.$error"/>
+      <label class="form__label" name="publisher">Publisher</label>
+      <input class="form__input" type="text" v-model.trim="publisher"/>
     </div>
     <div class="error" v-if="!$v.publisher.required">Publisher is Required</div>
 
@@ -77,6 +77,9 @@ export default {
     price: {
       required,
       between: between(0, 10000)
+    },
+    publisher: {
+      required
     }
   },
   methods: {
@@ -92,7 +95,9 @@ export default {
           this.submitStatus = 'OK'
           var cosmetic = {
             name: this.name,
-            brand: this.brand
+            brand: this.brand,
+            price: this.price,
+            publisher: this.publisher
           }
           this.cosmetic = cosmetic
           console.log('Submitting in CosmeticForm : ' +
