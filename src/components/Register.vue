@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import CustomerService from '@/services/CustomerService'
+import SellerService from '@/services/SellerService'
 export default {
   data () {
     return {
@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     register: function () {
-      CustomerService.postCustomer()
+      SellerService.postNewSeller()
         .then(response => {
           console.log(response)
         })
