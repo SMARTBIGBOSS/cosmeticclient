@@ -6,6 +6,7 @@
         <v-text-field label="Name" single-line v-model="name"></v-text-field>
         <v-text-field label="Email" v-model="email"></v-text-field>
         <v-text-field label="Password" v-model="password"></v-text-field>
+
         <v-btn class="mb-3" success @click="register">Register</v-btn>
       </v-flex>
     </v-layout>
