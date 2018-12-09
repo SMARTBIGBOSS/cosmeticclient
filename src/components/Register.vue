@@ -14,13 +14,36 @@
 </template>
 
 <script>
-import SellerService from '@/services/SellerService'
+import CustomerService from '@/services/CustomerService'
+import Vue from 'vue'
+import VueForm from 'vueform'
+import Vuelidate from 'vuelidate'
+import { required, email } from 'vuelidate/lib/validators'
+
+Vue.use(VueForm, {
+  inputClasses: {
+    valid: 'form-control-success',
+    invalid: 'form-control-danger'
+  }
+})
+
+Vue.use(Vuelidate)
+
 export default {
+  name: 'Register',
   data () {
     return {
       name: '',
       email: '',
       password: ''
+    }
+  },
+  validations: {
+    name: {
+      required
+    },
+    email: {
+      email
     }
   },
   methods: {

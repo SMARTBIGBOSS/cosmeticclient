@@ -4,9 +4,6 @@ export default {
   fetchCosmetics () {
     return Api().get('/cosmetics')
   },
-  fetchCosmetic (id) {
-    return Api().get(`/cosmetic/${id}`)
-  },
   fetchCosmeticsByHighPrice () {
     return Api().get('/cosmetics/sortByHighPrice')
   },
@@ -16,10 +13,13 @@ export default {
   postCosmetic () {
     return Api().post('/cosmetics/:publisher/add')
   },
-  putCosmetic (id, publisher, cosmetic) {
-    console.log('REQUESTING ' + cosmetic._id + ' ' +
+  fetchCosmetic (id) {
+    return Api().get(`/cosmetic/${id}`)
+  },
+  putCosmetic (id, cosmetic) {
+    console.log('REQUESTING ' + id + ' ' +
       JSON.stringify(cosmetic, null, 5))
-    return Api().put(`/cosmetics/${publisher}/${id}/edit`, cosmetic,
+    return Api().put(`/cosmetics/${id}/edit`, cosmetic,
       { headers: {'Content-type': 'application/json'} })
   },
   deleteCosmetic () {

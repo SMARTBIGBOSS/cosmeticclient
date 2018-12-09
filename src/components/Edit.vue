@@ -5,8 +5,8 @@
       <div class="row justify-content-center">
         <div class="col-md-6">
           <template v-if="childDataLoaded">
-          <cosmeticform :cosmetic="cosmetic" cosmeticBtnTitle="Update Cosmetic"
-                         @cosmetic-is-created-updated="updateCosmetic"></cosmeticform>
+          <cosmetic-form :cosmetic="cosmetic" cosmeticBtnTitle="Update Cosmetic"
+                         @cosmetic-is-created-updated="updateCosmetic"></cosmetic-form>
           </template>
         </div><!-- /col -->
       </div><!-- /row -->
@@ -35,10 +35,10 @@ export default {
   },
   methods: {
     getCosmetic: function () {
-      CosmeticService.fetchCosmetic(this.$router.params.id)
+      CosmeticService.fetchCosmetic(this.$router.params)
         .then(response => {
           this.temp = response.data
-          this.cosmetic = this.temp[0]
+          this.cosmetic = response.data
           this.childDataLoaded = true
           console.log('Getting Cosmetic in Edit: ' + JSON.stringify(this.cosmetic, null, 5))
         })
@@ -49,7 +49,7 @@ export default {
     },
     updateCosmetic: function (cosmetic) {
       console.log('Before PUT ' + JSON.stringify(cosmetic, null, 5))
-      CosmeticService.putCosmetic(this.$router.params.id, this.$router.params.publisher, cosmetic)
+      CosmeticService.putCosmetic(this.$router.params, cosmetic)
         .then(response => {
           console.log(response)
           console.log('AFTER PUT ' + JSON.stringify(cosmetic, null, 5))
