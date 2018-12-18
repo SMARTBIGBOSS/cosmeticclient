@@ -8,7 +8,7 @@ import Login from '@/components/Login'
 import Edit from '@/components/Edit'
 import Order from '@/components/Order'
 import AddCosmetic from '@/components/AddCosmetic'
-// import OrdersList from '@/components/OrderList'
+import OrdersList from '@/components/OrdersList'
 
 Vue.use(Router)
 
@@ -63,14 +63,14 @@ let router = new Router({
         requiresAuth: true
       }
     },
-    // {
-    //   path: '/orders',
-    //   name: 'OrdersList',
-    //   component: OrdersList,
-    //   meta: {
-    //     requiresAuth: true
-    //   }
-    // },
+    {
+      path: '/orders',
+      name: 'OrdersList',
+      component: OrdersList,
+      meta: {
+        requiresAuth: true
+      }
+    },
     {
       path: '/orderCosmetic',
       name: 'Order',

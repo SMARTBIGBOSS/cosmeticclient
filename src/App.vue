@@ -8,12 +8,12 @@
         <b-navbar-nav>
           <b-nav-item to="/#"><i class="fa fa-home" style="padding: 5px" @click="changeLoginShow"> Home</i></b-nav-item>
             <b-nav-item to="/cosmetics/publisher" v-if="(roletype === 'Seller')" @click="login"><i class="fa fa-list" style="padding: 5px"> Manage Cosmetics</i></b-nav-item>
-            <b-nav-item to="/cosmetics/publisher/add" v-if="(roletype === 'Seller')" @click="login"><i class="fa fa-list" style="padding: 5px"> Add Cosmetics</i></b-nav-item>
+            <b-nav-item to="/cosmetics/publisher/add" v-if="(roletype === 'Seller')" @click="login"><i class="fa fa-plus-square" style="padding: 5px"> Add Cosmetics</i></b-nav-item>
             <b-nav-item to="/cosmetics" v-if="(roletype !== 'Seller')" @click="login"><i class="fa fa-list" style="padding: 5px"> Cosmetics List</i></b-nav-item>
-          <b-nav-item to="/orders" v-if="(roletype !== 'Seller')" @click="login"><i class="fa fa-list" style="padding: 5px"> Orders List</i></b-nav-item>
+            <b-nav-item to="/orders" v-if="(roletype !== 'Seller')" @click="login"><i class="fa fa-list" style="padding: 5px"> Orders List</i></b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto">
-          <b-nav-item to="/register" ><i class="fa fa-sign-up" style="padding: 5px"> Register </i></b-nav-item>
+          <b-nav-item to="/register" ><i class="fa fa-sign-in" style="padding: 5px"> Register </i></b-nav-item>
           <b-nav-item to="/login" v-if="(islogin === false)" @click="login"><i class="fa fa-sign-in" style="padding: 5px"> Login </i></b-nav-item>
           <b-nav-item to="/logout" v-if="(islogin !== false)" @click="logout"><i class="fa fa-sign-out" style="padding: 5px"> Logout </i></b-nav-item>
           <i class="fa fa-pied-piper-alt fa-1x" style="padding: 5px; color: white;"></i>
