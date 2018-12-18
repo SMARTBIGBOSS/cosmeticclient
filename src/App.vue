@@ -7,14 +7,10 @@
       <b-collapse is-nav id="nav_collapse">
         <b-navbar-nav>
           <b-nav-item to="/#"><i class="fa fa-home" style="padding: 5px" @click="changeLoginShow"> Home</i></b-nav-item>
-          <div v-if="(roletype === 'Seller')">
-            <b-nav-item to="/cosmetics/publisher" @click="login"><i class="fa fa-list" style="padding: 5px"> Manage Cosmetics</i></b-nav-item>
-            <b-nav-item to="/cosmetics/publisher/add" @click="login"><i class="fa fa-list" style="padding: 5px"> Add Cosmetics</i></b-nav-item>
-          </div>
-          <div v-if="(roletype !== 'Seller')">
-            <b-nav-item to="/cosmetics"><i class="fa fa-list" style="padding: 5px"> Cosmetics List</i></b-nav-item>
-            <b-nav-item to="/orders"><i class="fa fa-list" style="padding: 5px"> Orders List</i></b-nav-item>
-          </div>
+            <b-nav-item to="/cosmetics/publisher" v-if="(roletype === 'Seller')" @click="login"><i class="fa fa-list" style="padding: 5px"> Manage Cosmetics</i></b-nav-item>
+            <b-nav-item to="/cosmetics/publisher/add" v-if="(roletype === 'Seller')" @click="login"><i class="fa fa-list" style="padding: 5px"> Add Cosmetics</i></b-nav-item>
+            <b-nav-item to="/cosmetics" v-if="(roletype !== 'Seller')" @click="login"><i class="fa fa-list" style="padding: 5px"> Cosmetics List</i></b-nav-item>
+          <b-nav-item to="/orders" v-if="(roletype !== 'Seller')" @click="login"><i class="fa fa-list" style="padding: 5px"> Orders List</i></b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto">
           <b-nav-item to="/register" ><i class="fa fa-sign-up" style="padding: 5px"> Register </i></b-nav-item>
@@ -33,13 +29,11 @@ export default {
   name: 'App',
   data () {
     return {
-      islogin: false
+      islogin: false,
+      roletype: sessionStorage.getItem('role')
     }
   },
   methods: {
-    roletype () {
-      return sessionStorage.getItem('user')
-    },
     changeLoginShow () {
       this.islogin = false
       // this.$router.push('/login')

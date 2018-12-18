@@ -5,7 +5,7 @@
       <input class="form__input" type="text" v-model.trim="name"/>
     </div>
     <div class="error" v-if="!$v.name.required">Name is Required</div>
-    <div class="error" v-if="!$v.name.maxLength">Name must have at most {{$v.name.$params.maxLength.max}} letters.</div>
+    <div class="error" v-if="!$v.name.maxLength">Name must has at most {{$v.name.$params.maxLength.max}} letters.</div>
 
     <div class="form-group" :class="{ 'form-group--error': $v.brand.$error }">
       <label class="form-label" name="brand">Brand (required)</label>
@@ -21,8 +21,8 @@
     <div class="error" v-if="!$v.price.between">Price must be between 0 and 10000</div>
 
     <div class="form-group" :class="{ 'form-group--error': $v.publisher.$error }">
-      <label class="form__label" name="publisher">Publisher</label>
-      <input class="form__input" type="text" v-model.trim="publisher"/>
+      <label class="form__label" name="publisher">Publisher(cannot edited)</label>
+      <input class="form__input" type="text" v-model.trim="publisher" readonly/>
     </div>
     <div class="error" v-if="!$v.publisher.required">Publisher is Required</div>
 

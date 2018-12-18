@@ -60,7 +60,7 @@ Vue.use(VueForm, {
 Vue.use(Vuelidate)
 
 export default {
-  name: 'login',
+  name: 'register',
   data () {
     return {
       role: '',
