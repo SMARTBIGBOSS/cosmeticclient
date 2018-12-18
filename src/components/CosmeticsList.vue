@@ -24,11 +24,11 @@ export default {
   name: 'Cosmetics',
   data () {
     return {
-      messagetitle: ' Cosmetics Management ',
+      messagetitle: ' Cosmetics List ',
       cosmetics: [],
       props: ['_id'],
       errors: [],
-      columns: ['_id', 'name', 'brand', 'price', 'edit', 'remove'],
+      columns: ['name', 'brand', 'price', 'release_date', 'edit', 'remove'],
       options: {
         perPage: 10,
         filterable: ['name', 'brand'],
@@ -37,8 +37,9 @@ export default {
           _id: 'ID',
           name: 'Name',
           brand: 'Brand',
-          price: 'Price'
-          // publisher: 'Seller'
+          price: 'Price',
+          publisher: 'Seller',
+          release_date: 'Date'
         }
       }
     }
@@ -49,8 +50,7 @@ export default {
   },
   methods: {
     loadCosmetics: function () {
-      var publisher = sessionStorage.getItem('user')
-      CosmeticService.fetchCosmeticsByPublisher(publisher)
+      CosmeticService.fetchCosmetics()
         .then(response => {
           // JSON responses are automatically parsed.
           this.cosmetics = response.data

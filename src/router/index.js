@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Home'
+import CosmeticsList from '@/components/CosmeticsList'
 import Cosmetics from '@/components/Cosmetics'
 import Register from '@/components/Register'
 import Login from '@/components/Login'
@@ -16,6 +17,11 @@ let router = new Router({
       path: '/',
       name: 'Home',
       component: Home
+    },
+    {
+      path: '/cosmetics',
+      name: 'CosmeticsList',
+      component: CosmeticsList
     },
     {
       path: '/cosmetics/publisher',
