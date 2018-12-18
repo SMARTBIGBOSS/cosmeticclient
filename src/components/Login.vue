@@ -5,6 +5,14 @@
       <div class="row justify-content-center">
         <div class="col-md-6">
           <form @submit.prevent="submit">
+            <div class="form-group">
+              <label class="form-label">Select Role Type</label>
+              <select id="role" name="role" class="form-control"
+                      type="text" v-model="role">
+                <option value="Seller">Seller</option>
+                <option value="Customer">Customer</option>
+              </select>
+            </div>
             <div class="form-group" :class="{ 'form-group--error': $v.email.$error }">
               <label class="form-label" name="email">Email</label>
               <input class="form__input" type="email" placeholder="Enter Email" v-model.trim="email"/>
@@ -30,6 +38,7 @@
 </template>
 
 <script>
+import CustomerService from '@/services/customerservice'
 import SellerService from '@/services/sellerservice'
 import Vue from 'vue'
 import VueForm from 'vueform'
@@ -49,6 +58,7 @@ export default {
   name: 'login',
   data () {
     return {
+      role: '',
       email: '',
       password: '',
       hint: false,
@@ -74,22 +84,43 @@ export default {
       } else {
         this.submitStatus = 'PENDING'
         let parames = {'email': this.email, 'password': this.password}
-        SellerService.postSellerLogin(parames)
-          .then(response => {
-            this.info = response
-            console.log(this.info.data.data)
-            if (this.info.data.data === null) {
-              this.submitStatus = 'ERROR'
-            } else {
-              this.submitStatus = 'OK'
-              sessionStorage.setItem('token', this.info.headers.token)
-              sessionStorage.setItem('user', this.info.data.data._id)
-              // sessionStorage.setItem('isLogin', true)
-              setTimeout(() => {
-                this.$router.push('/cosmetics/publisher')
-              }, 1000)
-            }
-          })
+        if (this.role === 'Seller') {
+          SellerService.postSellerLogin(parames)
+            .then(response => {
+              this.info = response
+              console.log(this.info.data.data)
+              if (this.info.data.data === null) {
+                this.submitStatus = 'ERROR'
+              } else {
+                this.submitStatus = 'OK'
+                sessionStorage.setItem('token', this.info.headers.token)
+                sessionStorage.setItem('user', this.info.data.data._id)
+                sessionStorage.setItem('role', this.role)
+                // sessionStorage.setItem('isLogin', true)
+                setTimeout(() => {
+                  this.$router.push('/cosmetics/publisher')
+                }, 1000)
+              }
+            })
+        } else if (this.role === 'Customer') {
+          CustomerService.postCustomerLogin(parames)
+            .then(response => {
+              this.info = response
+              console.log(this.info.data.data)
+              if (this.info.data.data === null) {
+                this.submitStatus = 'ERROR'
+              } else {
+                this.submitStatus = 'OK'
+                sessionStorage.setItem('token', this.info.headers.token)
+                sessionStorage.setItem('user', this.info.data.data._id)
+                sessionStorage.setItem('role', this.role)
+                // sessionStorage.setItem('isLogin', true)
+                setTimeout(() => {
+                  this.$router.push('/cosmetics')
+                }, 1000)
+              }
+            })
+        }
       }
     }
   }

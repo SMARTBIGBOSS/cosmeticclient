@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Home'
-import Cosmetic from '@/components/Cosmetics'
+import Cosmetics from '@/components/Cosmetics'
 import Register from '@/components/Register'
 import Login from '@/components/Login'
 import Edit from '@/components/Edit'
@@ -20,7 +20,7 @@ let router = new Router({
     {
       path: '/cosmetics/publisher',
       name: 'Cosmetics',
-      component: Cosmetic,
+      component: Cosmetics,
       meta: {
         requiresAuth: true
       }

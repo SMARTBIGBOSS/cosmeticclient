@@ -5,6 +5,14 @@
       <div class="row justify-content-center">
         <div class="col-md-6">
           <form @submit.prevent="register">
+            <div class="form-group">
+              <label class="form-label">Select Role Type</label>
+              <select id="role" name="role" class="form-control"
+                      type="text" v-model="role">
+                <option value="Seller">Seller</option>
+                <option value="Customer">Customer</option>
+              </select>
+            </div>
             <div class="form-group" :class="{ 'form-group--error': $v.name.$error }">
               <label class="form-label" name="name">Name</label>
               <input class="form__input" type="name" placeholder="Enter Username" v-model.trim="name"/>
@@ -35,6 +43,7 @@
 </template>
 
 <script>
+import CustomerService from '@/services/customerservice'
 import SellerService from '@/services/sellerservice'
 import Vue from 'vue'
 import VueForm from 'vueform'
@@ -54,6 +63,7 @@ export default {
   name: 'login',
   data () {
     return {
+      role: '',
       name: '',
       email: '',
       password: '',
@@ -83,25 +93,47 @@ export default {
       } else {
         this.submitStatus = 'PENDING'
         let parames = {'name': this.name, 'email': this.email, 'password': this.password}
-        SellerService.postSellerRegister(parames)
-          .then(response => {
-            this.info = response
-            // console.log(this.info.data)
-            if (this.info.data.data === null) {
-              console.log(this.info.data.errmsg.errmsg)
-              var substring = String(this.info.data.errmsg.errmsg).search('$name_1 dup key')
-              console.log(substring)
-              if (substring !== -1) {
-                this.error = 'Name already exists'
+        if (this.role === 'Seller') {
+          SellerService.postSellerRegister(parames)
+            .then(response => {
+              this.info = response
+              // console.log(this.info.data)
+              if (this.info.data.data === null) {
+                console.log(this.info.data.errmsg.errmsg)
+                var substring = String(this.info.data.errmsg.errmsg).search('$name_1 dup key')
+                console.log(substring)
+                if (substring !== -1) {
+                  this.error = 'Name already exists'
+                }
+                this.submitStatus = 'ERROR'
+              } else {
+                this.submitStatus = 'OK'
+                setTimeout(() => {
+                  this.$router.push('/')
+                }, 1000)
               }
-              this.submitStatus = 'ERROR'
-            } else {
-              this.submitStatus = 'OK'
-              setTimeout(() => {
-                this.$router.push('/')
-              }, 1000)
-            }
-          })
+            })
+        } else if (this.role === 'Customer') {
+          CustomerService.postCustomerRegister(parames)
+            .then(response => {
+              this.info = response
+              // console.log(this.info.data)
+              if (this.info.data.data === null) {
+                console.log(this.info.data.errmsg.errmsg)
+                var substring = String(this.info.data.errmsg.errmsg).search('$name_1 dup key')
+                console.log(substring)
+                if (substring !== -1) {
+                  this.error = 'Name already exists'
+                }
+                this.submitStatus = 'ERROR'
+              } else {
+                this.submitStatus = 'OK'
+                setTimeout(() => {
+                  this.$router.push('/')
+                }, 1000)
+              }
+            })
+        }
       }
     }
   }
