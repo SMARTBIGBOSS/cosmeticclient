@@ -1,10 +1,10 @@
 import Api from '@/services/api'
 
 export default {
-  postSeller (parame) {
+  postSellerLogin (parame) {
     return Api().post('/seller/login', parame)
   },
-  postNewSeller () {
-    return Api().post('/seller/signUp')
+  postSellerRegister (parame) {
+    return Api().post('/seller/signUp', parame)
   }
 }

@@ -7,7 +7,7 @@
     <div class="error" v-if="!$v.name.required">Name is Required</div>
     <div class="error" v-if="!$v.name.maxLength">Name must have at most {{$v.name.$params.maxLength.max}} letters.</div>
 
-    <div class="form-group--error" :class="{ 'form-group--error': $v.brand.$error }">
+    <div class="form-group" :class="{ 'form-group--error': $v.brand.$error }">
       <label class="form-label" name="brand">Brand (required)</label>
       <input class="form__input" type="text" v-model.trim="brand"/>
     </div>
@@ -30,7 +30,7 @@
       <button class="btn btn-primary btn1" type="submit" :disabled="submitStatus === 'PENDING'">{{ cosmeticBtnTitle }}</button>
     </p>
     <p>
-      <a href="#/cosmetics" class="btn btn-primary btn1" role="button">Manage Cosmetic</a>
+      <a href="/cosmetics/publisher" class="btn btn-primary btn1" role="button">Manage Cosmetic</a>
     </p>
     <p class="typo__p" v-if="submitStatus === 'OK'">Add a Cosmetic Successfully!</p>
     <p class="typo__p" v-if="submitStatus === 'ERROR'">Please Fill in the Form Correctly.</p>

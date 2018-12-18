@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import CosmeticService from '@/services/CosmeticService'
+import CosmeticService from '@/services/cosmeticservice'
 import Vue from 'vue'
 import VueTables from 'vue-tables-2'
 
@@ -28,7 +28,7 @@ export default {
       cosmetics: [],
       props: ['_id'],
       errors: [],
-      columns: ['_id', 'name', 'brand', 'price', 'publisher', 'edit', 'remove'],
+      columns: ['_id', 'name', 'brand', 'price', 'edit', 'remove'],
       options: {
         perPage: 10,
         filterable: ['name', 'brand'],
@@ -37,8 +37,8 @@ export default {
           _id: 'ID',
           name: 'Name',
           brand: 'Brand',
-          price: 'Price',
-          publisher: 'Seller'
+          price: 'Price'
+          // publisher: 'Seller'
         }
       }
     }
@@ -49,7 +49,8 @@ export default {
   },
   methods: {
     loadCosmetics: function () {
-      CosmeticService.fetchCosmetics()
+      var publisher = sessionStorage.getItem('user')
+      CosmeticService.fetchCosmeticsByPublisher(publisher)
         .then(response => {
           // JSON responses are automatically parsed.
           this.cosmetics = response.data
@@ -84,10 +85,10 @@ export default {
           console.log(error)
         })
     },
-    editCosmetic: function (id, publisher) {
+    editCosmetic: function (id) {
       this.$router.params = id
       // this.$router.params.publisher = publisher
-      this.$router.push('edit')
+      this.$router.push('/edit')
     },
     deleteCosmetic: function (id) {
       this.$swal({
@@ -102,7 +103,8 @@ export default {
       }).then((result) => {
         console.log('SWAL Result : ' + result.value)
         if (result.value === true) {
-          CosmeticService.deleteCosmetic(id)
+          var publisher = sessionStorage.getItem('user')
+          CosmeticService.deleteCosmetic(publisher, id)
             .then(response => {
               // JSON responses are automatically parsed.
               this.message = response.data

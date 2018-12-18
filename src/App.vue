@@ -6,16 +6,14 @@
       <b-navbar-brand to="/">Cosmetics Web App</b-navbar-brand>
       <b-collapse is-nav id="nav_collapse">
         <b-navbar-nav>
-          <b-nav-item to="/#"><i class="fa fa-home" style="padding: 5px"> Home</i></b-nav-item>
-          <b-nav-item to="/cosmetics"><i class="fa fa-list" style="padding: 5px"> Manage Cosmetics</i></b-nav-item>
-          <b-nav-item to="/donate"><i class="fa fa-money" style="padding: 5px"> Donate</i></b-nav-item>
-          <b-nav-item to="/map"><i class="fa fa-globe" style="padding: 5px"> Map</i></b-nav-item>
+          <b-nav-item to="/#"><i class="fa fa-home" style="padding: 5px" @click="changeLoginShow"> Home</i></b-nav-item>
+          <b-nav-item to="/cosmetics/publisher" @click="login"><i class="fa fa-list" style="padding: 5px"> Manage Cosmetics</i></b-nav-item>
+          <b-nav-item to="/cosmetics/publisher/add" @click="login"><i class="fa fa-list" style="padding: 5px"> Add Cosmetics</i></b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto">
-          <b-nav-item to="/about"><i class="fa fa-info" style="padding: 5px"> About Us</i></b-nav-item>
-          <b-nav-item to="/register"><i class="fa fa-comment" style="padding: 5px"> Register</i></b-nav-item>
-          <b-nav-item to="/login"><i class="fa fa-sign-in" style="padding: 5px"> Login </i></b-nav-item>
-          <b-nav-item to="/logout"><i class="fa fa-sign-out" style="padding: 5px"> Logout </i></b-nav-item>
+          <b-nav-item to="/register" ><i class="fa fa-sign-up" style="padding: 5px"> Register </i></b-nav-item>
+          <b-nav-item to="/login" v-if="(islogin === false)" @click="login"><i class="fa fa-sign-in" style="padding: 5px"> Login </i></b-nav-item>
+          <b-nav-item to="/logout" v-if="(islogin !== false)" @click="logout"><i class="fa fa-sign-out" style="padding: 5px"> Logout </i></b-nav-item>
           <i class="fa fa-pied-piper-alt fa-1x" style="padding: 5px; color: white;"></i>
         </b-navbar-nav>
       </b-collapse>
@@ -26,7 +24,55 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  data () {
+    return {
+      islogin: false
+    }
+  },
+  methods: {
+    changeLoginShow () {
+      this.islogin = false
+      // this.$router.push('/login')
+    },
+    login () {
+      this.islogin = true
+      // this.$router.push('/login')
+    },
+    logout () {
+      if (sessionStorage.getItem('token') === null) {
+        this.$swal('Logout', 'You should login first ', 'info')
+        this.islogin = false
+        this.$router.push('/')
+      } else {
+        this.$swal({
+          title: 'Logout',
+          text: 'Are you sure?',
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Logout',
+          cancelButtonText: 'Cancel',
+          showCloseButton: true
+          // showLoaderOnConfirm: true
+        }).then((result) => {
+          console.log('SWAL Result : ' + result.value)
+          if (result.value === true) {
+            sessionStorage.removeItem('token')
+            sessionStorage.removeItem('user')
+            this.islogin = false
+            // sessionStorage.setItem('isLogin', false)
+            this.$swal('Logout', 'You successfully logout ', 'success')
+            setTimeout(() => {
+              this.$router.push('/')
+            }, 1000)
+          } else {
+            console.log('SWAL Else Result : ' + result.value)
+            this.$swal('Cancelled', 'You still in logging status!', 'info')
+          }
+        })
+      }
+    }
+  }
 }
 </script>
 
