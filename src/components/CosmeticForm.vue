@@ -104,6 +104,9 @@ export default {
             JSON.stringify(this.cosmetic, null, 5))
           this.$emit('cosmetic-is-created-updated', this.cosmetic)
         }, 500)
+        setTimeout(() => {
+          this.$router.push('/cosmetics/publisher')
+        }, 1000)
       }
     }
   }

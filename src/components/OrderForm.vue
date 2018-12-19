@@ -19,22 +19,23 @@
     <div class="error" v-if="!$v.quantity.required">Quantity is Required</div>
     <div class="error" v-if="!$v.quantity.minValue">Quantity must be at least one</div>
 
+    <div class="form-group" :class="{ 'form-group--error': $v.shipping_address.$error }">
+      <label class="form-control-label" name="shipping_address">Shipping Address</label>
+      <input class="form__input" type="text" v-model.trim="shipping_address" />
+    </div>
+    <div>
+      <googlemap @location="showAddress"></googlemap>
+    </div>
+    <div class="error" v-if="!$v.shipping_address.required">Shipping Address is Required</div>
+
     <div class="form-group" :class="{ 'form-group--error': $v.contact_Num.$error }">
       <label class="form-control-label" name="contact_Num">Contact Number</label>
       <input class="form__input" type="decimal" v-model.trim="contact_Num"/>
     </div>
     <div class="error" v-if="!$v.contact_Num.required">Contact Number is Required</div>
 
-    <div class="form-group" :class="{ 'form-group--error': $v.shipping_address.$error }">
-      <label class="form-control-label" name="shipping_address">Shipping Address</label>
-      <input class="form__input" type="text" v-model.trim="shipping_address"/>
-    </div>
-    <div class="error" v-if="!$v.shipping_address.required">Shipping Address is Required</div>
     <p>
       <button class="btn btn-primary btn1" type="submit" :disabled="submitStatus === 'PENDING'">{{ orderBtnTitle }}</button>
-    </p>
-    <p>
-      <a href="/cosmetics/publisher" class="btn btn-primary btn1" role="button">Manage Cosmetic</a>
     </p>
     <p class="typo__p" v-if="submitStatus === 'OK'">Order a Cosmetic Successfully!</p>
     <p class="typo__p" v-if="submitStatus === 'ERROR'">Please Fill in the Form Correctly.</p>
@@ -47,6 +48,7 @@ import Vue from 'vue'
 import VueForm from 'vueform'
 import Vuelidate from 'vuelidate'
 import { required, minValue } from 'vuelidate/lib/validators'
+import GoogleMap from '@/components/GoogleMap'
 
 Vue.use(VueForm, {
   inputClasses: {
@@ -87,7 +89,14 @@ export default {
       required
     }
   },
+  components: {
+    'googlemap': GoogleMap
+  },
   methods: {
+    showAddress (location) {
+      this.shipping_address = location
+      console.log('aaa' + location)
+    },
     submit () {
       console.log('submit!')
       this.$v.$touch()
@@ -110,6 +119,9 @@ export default {
               JSON.stringify(this.transaction, null, 5))
           this.$emit('order-is-created', this.transaction)
         }, 500)
+        setTimeout(() => {
+          this.$router.push('/orders')
+        }, 1000)
       }
     }
   }

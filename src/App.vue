@@ -2,7 +2,7 @@
   <div id="app">
     <b-navbar toggleable="md" variant="dark" type="dark">
       <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
-      <img src="./assets/mevnnav.png" class="img-circle" style="padding: 5px">
+      <img src="./assets/logo.jpg" class="img-circle" style="padding: 5px">
       <b-navbar-brand to="/">Cosmetics Web App</b-navbar-brand>
       <b-collapse is-nav id="nav_collapse">
         <b-navbar-nav>
@@ -29,7 +29,7 @@ export default {
   name: 'App',
   data () {
     return {
-      islogin: false,
+      islogin: '',
       roletype: sessionStorage.getItem('role')
     }
   },
@@ -88,7 +88,14 @@ export default {
     text-align: center;
     color: #2c3e50;
     padding-top: 20px;
-    background: url("./assets/homerbgyellow.png") repeat center top;
+    background: url("./assets/background.jpg") no-repeat center top;
+    background-positio: fixed;
+    background-size: 100% 100%;
+  }
+  #imagezoom {
+    width:100%;
+    height: 100%;
+    position: fixed;
   }
   .VueTables__sortable {
     cursor: pointer;

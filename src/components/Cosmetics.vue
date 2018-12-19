@@ -2,10 +2,6 @@
   <div class="hero">
     <h3 class="vue-title"><i class="fa fa-list" style="padding: 3px"></i>{{messagetitle}}</h3>
     <div id="app1">
-      <div id="sortPrice">
-        <button v-on:click="sortByHighPrice">Sort by High Price</button>
-        <button v-on:click="sortByLowPrice">Sort by Low Price</button>
-      </div>
       <v-client-table :columns="columns" :data="cosmetics" :options="options">
         <a slot="edit" slot-scope="props" class="fa fa-edit fa-2x" @click="editCosmetic(props.row._id)"></a>
         <a slot="remove" slot-scope="props" class="fa fa-trash-o fa-2x" @click="deleteCosmetic(props.row._id)"></a>

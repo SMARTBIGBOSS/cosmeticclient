@@ -9,9 +9,6 @@
           <p>If you want to view, please login first.</p>
           <p>Just click <a href ="/login">here</a> to start</p>
         </td>
-        <td>
-          <img src="../assets/homer.gif" alt="description here" />
-        </td>
       </tr>
     </table>
   </div>

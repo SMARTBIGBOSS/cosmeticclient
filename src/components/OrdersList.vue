@@ -23,7 +23,7 @@ export default {
       transactions: [],
       props: ['_id'],
       errors: [],
-      columns: ['basket', 'cosmeId', 'quantity', 'shipping_address', 'contact_Num', 'status'],
+      columns: ['basket', 'cosmeId._id', 'quantity', 'shipping_address', 'contact_Num', 'status'],
       options: {
         perPage: 10,
         filterable: ['status'],

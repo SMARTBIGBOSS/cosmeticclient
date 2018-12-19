@@ -98,6 +98,7 @@ export default {
                 sessionStorage.setItem('role', this.role)
                 // sessionStorage.setItem('isLogin', true)
                 setTimeout(() => {
+                  this.reload()
                   this.$router.push('/cosmetics/publisher')
                 }, 1000)
               }
@@ -116,6 +117,7 @@ export default {
                 sessionStorage.setItem('role', this.role)
                 // sessionStorage.setItem('isLogin', true)
                 setTimeout(() => {
+                  // this.reload()
                   this.$router.push('/cosmetics')
                 }, 1000)
               }
