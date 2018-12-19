@@ -6,7 +6,7 @@
       <b-navbar-brand to="/">Cosmetics Web App</b-navbar-brand>
       <b-collapse is-nav id="nav_collapse">
         <b-navbar-nav>
-          <b-nav-item to="/#"><i class="fa fa-home" style="padding: 5px" @click="changeLoginShow"> Home</i></b-nav-item>
+          <b-nav-item to="/#"><i class="fa fa-home" style="padding: 5px" @click="login"> Home</i></b-nav-item>
             <b-nav-item to="/cosmetics/publisher" v-if="(roletype === 'Seller')" @click="login"><i class="fa fa-list" style="padding: 5px"> Manage Cosmetics</i></b-nav-item>
             <b-nav-item to="/cosmetics/publisher/add" v-if="(roletype === 'Seller')" @click="login"><i class="fa fa-plus-square" style="padding: 5px"> Add Cosmetics</i></b-nav-item>
             <b-nav-item to="/cosmetics" v-if="(roletype !== 'Seller')" @click="login"><i class="fa fa-list" style="padding: 5px"> Cosmetics List</i></b-nav-item>

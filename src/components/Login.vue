@@ -98,7 +98,7 @@ export default {
                 sessionStorage.setItem('role', this.role)
                 // sessionStorage.setItem('isLogin', true)
                 setTimeout(() => {
-                  this.reload()
+                  // this.reload()
                   this.$router.push('/cosmetics/publisher')
                 }, 1000)
               }
