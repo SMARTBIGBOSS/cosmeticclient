@@ -109,7 +109,7 @@ export default {
               } else {
                 this.submitStatus = 'OK'
                 setTimeout(() => {
-                  this.$router.push('/')
+                  this.$router.push('/login')
                 }, 1000)
               }
             })
@@ -129,7 +129,7 @@ export default {
               } else {
                 this.submitStatus = 'OK'
                 setTimeout(() => {
-                  this.$router.push('/')
+                  this.$router.push('/login')
                 }, 1000)
               }
             })
