@@ -100,7 +100,8 @@ export default {
         console.log('SWAL Result : ' + result.value)
         if (result.value === true) {
           var publisher = sessionStorage.getItem('user')
-          CosmeticService.deleteCosmetic(publisher, id)
+          var token = sessionStorage.getItem('token')
+          CosmeticService.deleteCosmetic(publisher, id, token)
             .then(response => {
               // JSON responses are automatically parsed.
               this.message = response.data

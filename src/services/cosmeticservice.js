@@ -26,7 +26,8 @@ export default {
     return Api().put(`/cosmetics/${id}/edit`, cosmetic,
       { headers: {'Content-type': 'application/json'} })
   },
-  deleteCosmetic (publisher, id) {
-    return Api().delete(`/cosmetics/${publisher}/${id}/delete`)
+  deleteCosmetic (publisher, id, token) {
+    return Api().delete(`/cosmetics/${publisher}/${id}/delete`,
+      { headers: {'token': token} })
   }
 }
